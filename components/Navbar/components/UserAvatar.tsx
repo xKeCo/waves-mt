@@ -13,9 +13,9 @@ export const UserAvatar = ({ photoURL, username }: { photoURL: string; username:
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className="ml-auto pr-3 flex items-center justify-start gap-2 w-auto border-none rounded-full py-2 px-3 hover:bg-neutral-700">
+        <div className="ml-auto flex w-auto items-center justify-start gap-2 rounded-full border-none px-3 py-2 pr-3 hover:bg-neutral-700">
           <Image src={photoURL} alt="Profile" width={16} height={16} />
-          <h1 className="text-neutral-400 text-sm">{username}</h1>
+          <h1 className="text-sm text-neutral-400">{username}</h1>
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="" align="end">

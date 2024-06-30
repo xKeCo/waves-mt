@@ -116,19 +116,19 @@ export default function AuthForm({ isRegister = false }: Readonly<{ isRegister?:
   }
 
   return (
-    <div className="max-w-sm min-h-[calc(100vh-64px)] mx-auto py-20 px-5">
-      <h1 className="text-lg font-medium text-neutral-200 mb-2">
+    <div className="mx-auto min-h-[calc(100vh-64px)] max-w-sm px-5 py-20">
+      <h1 className="mb-2 text-lg font-medium text-neutral-200">
         {isRegister ? 'Register' : 'Login'}
       </h1>
 
-      <p className="text-neutral-400 text-sm mt-1 tracking-tight font-medium">
+      <p className="mt-1 text-sm font-medium tracking-tight text-neutral-400">
         {isRegister ? 'Already have an account?' : "Don't have an account?"}{' '}
         <Link href={isRegister ? '/login' : '/register'} className="text-neutral-400 underline">
           {isRegister ? 'Login' : 'Register'}
         </Link>
       </p>
 
-      <div className="h-px bg-neutral-800 w-full my-4"></div>
+      <div className="my-4 h-px w-full bg-neutral-800"></div>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} autoComplete="off" className="space-y-4">
@@ -176,7 +176,7 @@ export default function AuthForm({ isRegister = false }: Readonly<{ isRegister?:
             )}
           />
           <Button type="submit" className="w-full" variant="secondary" disabled={loading}>
-            {loading && <Loader className="w-4 h-4 mr-2 animate-spin" />}
+            {loading && <Loader className="mr-2 h-4 w-4 animate-spin" />}
             {isRegister ? 'Register' : 'Login'}
           </Button>
         </form>
@@ -184,9 +184,9 @@ export default function AuthForm({ isRegister = false }: Readonly<{ isRegister?:
 
       {!isRegister && (
         <>
-          <div className="h-px bg-neutral-800 w-full my-4"></div>
+          <div className="my-4 h-px w-full bg-neutral-800"></div>
 
-          <p className="text-neutral-400 text-sm mt-1 tracking-tight font-medium">
+          <p className="mt-1 text-sm font-medium tracking-tight text-neutral-400">
             Forgot your password?{' '}
             <span className="text-neutral-400 underline">I cannot do anything yet</span>.
           </p>

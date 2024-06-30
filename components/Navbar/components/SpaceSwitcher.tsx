@@ -3,7 +3,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 export const SpaceSwitcher = () => {
   return (
     <Select defaultValue="workspace1">
-      <SelectTrigger className="w-auto border-none rounded-full h-9 py-2 px-3 gap-2 hover:bg-neutral-700 focus:ring-0 focus:ring-offset-0 ">
+      <SelectTrigger className="h-9 w-auto gap-2 rounded-full border-none px-3 py-2 hover:bg-neutral-700 focus:ring-0 focus:ring-offset-0">
         <SelectValue placeholder="Select Workspace" />
       </SelectTrigger>
       <SelectContent>

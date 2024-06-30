@@ -8,12 +8,12 @@ export const Navbar = async () => {
   const session = await auth();
 
   return (
-    <nav className="flex items-center  w-full h-16 px-6 ">
+    <nav className="flex h-16 w-full items-center px-6">
       <Image src={logo} alt="Sisas" width={35} height={35} className="mr-2" />
 
       {session && (
         <>
-          <hr className="bg-neutral-700 w-px h-5 mx-3 rotate-12" />
+          <hr className="mx-3 h-5 w-px rotate-12 bg-neutral-700" />
 
           <SpaceSwitcher />
           <UserAvatar photoURL={session.user.photoURL} username={session.user.username} />

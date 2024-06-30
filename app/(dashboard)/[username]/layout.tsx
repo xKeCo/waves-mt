@@ -6,7 +6,7 @@ interface IDashboardLayoutProps {
 
 export default function DashboardLayout({ children }: Readonly<IDashboardLayoutProps>) {
   return (
-    <main className="w-full overflow-x-hidden overflow-y-auto">
+    <main className="w-full overflow-y-auto overflow-x-hidden">
       <Navbar />
       {children}
     </main>

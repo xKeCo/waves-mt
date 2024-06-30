@@ -6,7 +6,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="w-full min-h-screen overflow-x-hidden overflow-y-auto">
+    <main className="min-h-screen w-full overflow-y-auto overflow-x-hidden">
       <Navbar />
       {children}
     </main>
