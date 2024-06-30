@@ -12,11 +12,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: {},
       },
       authorize: async (credentials) => {
-        let user = null;
-
-        user = await prisma.user.findUnique({
+        const user = await prisma.user.findUnique({
           where: {
-            email: (credentials.email as string).toLowerCase(),
+            email: credentials.email as string,
           },
         });
 
@@ -25,15 +23,30 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
 
         if (!bycryptjs.compareSync(credentials.password as string, user.password)) {
-          return null;
+          throw new Error('Password does not match.');
         }
 
         const { password: _, ...rest } = user;
-
-        console.log('user', rest);
 
         return rest;
       },
     }),
   ],
+  callbacks: {
+    jwt({ token, user }) {
+      if (user) {
+        token.user = user;
+      }
+
+      return token;
+    },
+    session({ session, token }) {
+      session.user = token.user as any;
+      return session;
+    },
+  },
+  pages: {
+    signIn: '/login',
+    newUser: '/register',
+  },
 });

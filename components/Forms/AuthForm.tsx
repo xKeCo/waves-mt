@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { signIn } from 'next-auth/react';
 import { toast } from 'sonner';
 import { LoaderCircle } from 'lucide-react';
 import {
@@ -17,11 +18,11 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { registerUser } from '@/actions/auth/register';
-import { signIn } from '@/auth';
-import { loginUser } from '@/actions/auth/login';
+import { useRouter } from 'next/navigation';
 
 export default function AuthForm({ isRegister = false }: Readonly<{ isRegister?: boolean }>) {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const FormSchema = z.object({
     email: z.string().email(),
@@ -45,25 +46,28 @@ export default function AuthForm({ isRegister = false }: Readonly<{ isRegister?:
     },
   });
 
-  const startLogin = async (email: string, password: string) => {
+  const startLogin = async (data: z.infer<typeof FormSchema>) => {
     setLoading(true);
 
     try {
-      const signInResult = await loginUser(email, password);
+      const signInResult = await signIn('credentials', {
+        email: data.email,
+        password: data.password,
+        redirect: false,
+      });
 
       setLoading(false);
 
-      if (!signInResult?.ok) {
+      if (signInResult?.error) {
         return toast.error('Credenciales inválidas');
       }
 
-      console.log('logged');
       toast.success('Inicio de sesión exitoso');
 
-      // router.replace('/dashboard');
+      router.replace('/');
     } catch (error) {
       setLoading(false);
-      console.log('error', error);
+      console.error('error', error);
       toast.error('Ha ocurrido un error durante el inicio de sesión');
     }
   };
@@ -93,11 +97,11 @@ export default function AuthForm({ isRegister = false }: Readonly<{ isRegister?:
         return toast.error(errorMessage);
       }
 
-      await startLogin(email, password);
+      await startLogin(data);
 
       toast.success('Account created successfully.');
     } catch (error) {
-      console.log('error', error);
+      console.error('error', error);
       toast.error('An error occurred while registering.');
     }
   };
@@ -106,7 +110,7 @@ export default function AuthForm({ isRegister = false }: Readonly<{ isRegister?:
     if (isRegister) {
       startRegister(data);
     } else {
-      startLogin(data.email, data.password);
+      startLogin(data);
     }
   }
 

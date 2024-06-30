@@ -1,19 +1,12 @@
-"use server";
-import prisma from "@/lib/prisma";
-import bcryptjs from "bcryptjs";
+'use server';
+import prisma from '@/lib/prisma';
+import bcryptjs from 'bcryptjs';
 
-export const registerUser = async (
-  email: string,
-  password: string,
-  username: string,
-) => {
+export const registerUser = async (email: string, password: string, username: string) => {
   try {
     const existingUser = await prisma.user.findFirst({
       where: {
-        OR: [
-          { email: email.toLowerCase() },
-          { username: username.toLowerCase() },
-        ],
+        OR: [{ email: email.toLowerCase() }, { username: username.toLowerCase() }],
       },
     });
 
@@ -21,16 +14,16 @@ export const registerUser = async (
       if (existingUser.email === email.toLowerCase()) {
         return {
           ok: false,
-          errorMessage: "An account with that email already exists.",
-          error: "emailExists",
+          errorMessage: 'An account with that email already exists.',
+          error: 'emailExists',
         };
       }
 
       if (existingUser.username === username.toLowerCase()) {
         return {
           ok: false,
-          errorMessage: "An account with that username already exists.",
-          error: "usernameExists",
+          errorMessage: 'An account with that username already exists.',
+          error: 'usernameExists',
         };
       }
     }
@@ -57,12 +50,12 @@ export const registerUser = async (
       user: newUser,
     };
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return {
       ok: false,
-      errorMessage: "Ha ocurrido un error durante el registro.",
-      error: "unknown",
+      errorMessage: 'Ha ocurrido un error durante el registro.',
+      error: 'unknown',
     };
   }
 };
