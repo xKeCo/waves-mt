@@ -7,7 +7,7 @@ export default function DashboardLayout({
 }>) {
   return (
     <main className="w-full min-h-screen overflow-x-hidden overflow-y-auto">
-      <Navbar username="xKeCo" />
+      <Navbar />
       {children}
     </main>
   );
