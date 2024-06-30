@@ -1,10 +1,13 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { signIn } from 'next-auth/react';
+
 import { toast } from 'sonner';
 import { LoaderCircle } from 'lucide-react';
 import {
@@ -17,10 +20,12 @@ import {
 } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+
 import { registerUser } from '@/actions/auth/register';
 
 export default function AuthForm({ isRegister = false }: Readonly<{ isRegister?: boolean }>) {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const FormSchema = z.object({
     email: z.string().email(),
@@ -51,7 +56,7 @@ export default function AuthForm({ isRegister = false }: Readonly<{ isRegister?:
       const signInResult = await signIn('credentials', {
         email: data.email,
         password: data.password,
-        callbackUrl: '/',
+        redirect: false,
       });
 
       setLoading(false);
@@ -60,7 +65,7 @@ export default function AuthForm({ isRegister = false }: Readonly<{ isRegister?:
         return toast.error('Credenciales inválidas');
       }
 
-      toast.success('Inicio de sesión exitoso');
+      router.refresh();
     } catch (error) {
       setLoading(false);
       console.error('error', error);
