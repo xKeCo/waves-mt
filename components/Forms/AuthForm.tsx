@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 import { signIn } from 'next-auth/react';
 
 import { toast } from 'sonner';
-import { LoaderCircle } from 'lucide-react';
+import { Loader } from 'lucide-react';
 import {
   Form,
   FormControl,
@@ -176,7 +176,7 @@ export default function AuthForm({ isRegister = false }: Readonly<{ isRegister?:
             )}
           />
           <Button type="submit" className="w-full" variant="secondary" disabled={loading}>
-            {loading && <LoaderCircle className="w-5 h-5 mr-2 animate-spin" />}
+            {loading && <Loader className="w-4 h-4 mr-2 animate-spin" />}
             {isRegister ? 'Register' : 'Login'}
           </Button>
         </form>

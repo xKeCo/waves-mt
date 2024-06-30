@@ -12,7 +12,7 @@ export default function Home() {
         </Link>
       </nav>
 
-      <h1 className="mt-6 tracking-tight font-semibold text-neutral-200">Waves Money Tracker</h1>
+      <h1 className="mt-6 tracking-tight font-semibold text-neutral-200">Waves MT</h1>
       <p className="text-neutral-400 mt-1 tracking-tight text-md font-medium text-[15px]">
         A simple money tracker web app. You should probably be using something else, though.
       </p>
