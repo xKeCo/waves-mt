@@ -11,11 +11,7 @@ export default auth((req) => {
   }
 
   if (isAuth) {
-    if (req.nextUrl.pathname === '/') {
-      return NextResponse.redirect(new URL(userPath, req.url));
-    }
-
-    if (!req.nextUrl.pathname.startsWith(userPath)) {
+    if (req.nextUrl.pathname === '/' || !req.nextUrl.pathname.startsWith(userPath)) {
       return NextResponse.redirect(new URL(userPath, req.url));
     }
   }

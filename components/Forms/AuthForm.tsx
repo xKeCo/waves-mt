@@ -18,11 +18,9 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { registerUser } from '@/actions/auth/register';
-import { useRouter } from 'next/navigation';
 
 export default function AuthForm({ isRegister = false }: Readonly<{ isRegister?: boolean }>) {
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
   const FormSchema = z.object({
     email: z.string().email(),
@@ -53,7 +51,7 @@ export default function AuthForm({ isRegister = false }: Readonly<{ isRegister?:
       const signInResult = await signIn('credentials', {
         email: data.email,
         password: data.password,
-        redirect: false,
+        callbackUrl: '/',
       });
 
       setLoading(false);
@@ -63,8 +61,6 @@ export default function AuthForm({ isRegister = false }: Readonly<{ isRegister?:
       }
 
       toast.success('Inicio de sesión exitoso');
-
-      router.replace('/');
     } catch (error) {
       setLoading(false);
       console.error('error', error);

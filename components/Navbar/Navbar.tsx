@@ -2,17 +2,14 @@ import Image from 'next/image';
 import { UserAvatar } from './components/UserAvatar';
 import { SpaceSwitcher } from './components/SpaceSwitcher';
 import { auth } from '@/auth';
+import logo from '@/public/logo.svg';
 
-type TNavbarProps = {
-  username: string;
-};
-
-export const Navbar = async ({ username }: TNavbarProps) => {
+export const Navbar = async () => {
   const session = await auth();
 
   return (
     <nav className="flex items-center  w-full h-16 px-6 ">
-      <Image src="/logo.svg" alt="Sisas" width={35} height={35} className="mr-2" />
+      <Image src={logo} alt="Sisas" width={35} height={35} className="mr-2" />
 
       {session && (
         <>

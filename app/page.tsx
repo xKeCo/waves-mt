@@ -1,11 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import logo from '@/public/logo.svg';
 
 export default function Home() {
   return (
     <main className="flex flex-col min-h-screen max-w-xl mx-auto py-36 px-5 text-justify">
       <nav className="flex items-center justify-between mb-16">
-        <Image src="/logo.svg" alt="Waves Money Tracker" width={38} height={38} />
+        <Image src={logo} alt="Waves Money Tracker" width={38} height={38} />
         <Link href="/login" className="text-[15px] text-neutral-400 underline tracking-tight">
           Login
         </Link>
