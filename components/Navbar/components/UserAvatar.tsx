@@ -8,8 +8,18 @@ import {
   DropdownMenuTrigger,
 } from '../../ui/dropdown-menu';
 import { signOut } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export const UserAvatar = ({ photoURL, username }: { photoURL: string; username: string }) => {
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await signOut({
+      redirect: false,
+    });
+    router.refresh();
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -23,7 +33,7 @@ export const UserAvatar = ({ photoURL, username }: { photoURL: string; username:
           <HelpCircle className="mr-2 h-4 w-4" />
           <span>Help</span>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => signOut()}>
+        <DropdownMenuItem onClick={handleLogout}>
           <LogOut className="mr-2 h-4 w-4" />
           <span>Logout</span>
         </DropdownMenuItem>
