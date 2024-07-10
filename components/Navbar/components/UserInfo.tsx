@@ -11,9 +11,11 @@ type TSession = {
 };
 
 export const UserInfo = (session: TSession) => {
+  const user = session.session?.user;
+
   return (
     <AnimatePresence>
-      {session.session && (
+      {user && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, transition: { duration: 0.3 } }}
@@ -22,11 +24,8 @@ export const UserInfo = (session: TSession) => {
         >
           <hr className="mx-3 h-5 w-px rotate-12 bg-neutral-700" />
 
-          <SpaceSwitcher />
-          <UserAvatar
-            photoURL={session.session.user?.photoURL!}
-            username={session.session.user?.username!}
-          />
+          <SpaceSwitcher username={user?.username} workspaces={user?.workspaces} />
+          <UserAvatar photoURL={user?.photoURL} username={user?.username} />
         </motion.div>
       )}
     </AnimatePresence>

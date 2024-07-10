@@ -3,6 +3,7 @@ import Credentials from 'next-auth/providers/credentials';
 
 import prisma from '@/lib/prisma';
 import bycryptjs from 'bcryptjs';
+import { cookies } from 'next/headers';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -30,6 +31,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
 
         const { password: _, ...rest } = user;
+
+        cookies().set('activeWorkspace', rest.workspaces[0].slug);
 
         return rest;
       },

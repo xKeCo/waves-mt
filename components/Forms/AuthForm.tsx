@@ -1,7 +1,6 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -25,7 +24,6 @@ import { registerUser } from '@/actions/auth/register';
 
 export default function AuthForm({ isRegister = false }: Readonly<{ isRegister?: boolean }>) {
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
   const FormSchema = z.object({
     email: z.string().email(),
@@ -56,7 +54,7 @@ export default function AuthForm({ isRegister = false }: Readonly<{ isRegister?:
       const signInResult = await signIn('credentials', {
         email: data.email,
         password: data.password,
-        redirect: false,
+        redirect: true,
       });
 
       setLoading(false);
@@ -64,8 +62,6 @@ export default function AuthForm({ isRegister = false }: Readonly<{ isRegister?:
       if (signInResult?.error) {
         return toast.error('Credenciales inválidas');
       }
-
-      router.refresh();
     } catch (error) {
       setLoading(false);
       console.error('error', error);

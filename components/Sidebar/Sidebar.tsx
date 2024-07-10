@@ -1,23 +1,28 @@
 'use client';
 import { cn } from '@/lib/utils';
 import { House, UserCog } from 'lucide-react';
-import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-export const Sidebar = () => {
+export const Sidebar = ({
+  params,
+}: {
+  params: {
+    username: string;
+    workspaceSlug: string;
+  };
+}) => {
   const pathanme = usePathname();
-  const { data } = useSession();
 
   const sideBarItems = [
     {
       label: 'Dashboard',
-      href: `/${data?.user.username}/1/dashboard`,
+      href: `/${params.username}/${params.workspaceSlug}/dashboard`,
       icon: <House size={18} />,
     },
     {
       label: 'Mi Cuenta',
-      href: `/${data?.user.username}`,
+      href: `/${params.username}/${params.workspaceSlug}`,
       icon: <UserCog size={18} />,
     },
   ];
