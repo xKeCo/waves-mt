@@ -8,13 +8,15 @@ import {
   DropdownMenuTrigger,
 } from '../../ui/dropdown-menu';
 import { signOut } from 'next-auth/react';
-import { deleteActiveWorkspace } from '../../../actions/workspace/setActiveWorkspace';
+import { useRouter } from 'next/navigation';
 
 export const UserAvatar = ({ photoURL, username }: { photoURL: string; username: string }) => {
+  const router = useRouter();
+
   const handleLogout = async () => {
-    await signOut({
-      redirect: true,
-    });
+    await signOut({ redirect: false });
+    router.replace('/');
+    router.refresh();
   };
 
   return (

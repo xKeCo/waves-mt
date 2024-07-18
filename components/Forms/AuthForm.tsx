@@ -21,9 +21,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
 import { registerUser } from '@/actions/auth/register';
+import { useRouter } from 'next/navigation';
 
 export default function AuthForm({ isRegister = false }: Readonly<{ isRegister?: boolean }>) {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const FormSchema = z.object({
     email: z.string().email(),
@@ -54,7 +56,7 @@ export default function AuthForm({ isRegister = false }: Readonly<{ isRegister?:
       const signInResult = await signIn('credentials', {
         email: data.email,
         password: data.password,
-        redirect: true,
+        redirect: false,
       });
 
       setLoading(false);
@@ -62,6 +64,9 @@ export default function AuthForm({ isRegister = false }: Readonly<{ isRegister?:
       if (signInResult?.error) {
         return toast.error('Credenciales inválidas');
       }
+
+      router.replace('/dashboard');
+      router.refresh();
     } catch (error) {
       setLoading(false);
       console.error('error', error);
