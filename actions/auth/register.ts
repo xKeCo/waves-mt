@@ -1,7 +1,7 @@
 'use server';
 import prisma from '@/lib/prisma';
 import bcryptjs from 'bcryptjs';
-import { createWorkspace } from '../workspace/createWorkspace';
+import { createWorkspaceRegister } from '../workspace/createWorkspace';
 
 export const registerUser = async (email: string, password: string, username: string) => {
   try {
@@ -47,7 +47,7 @@ export const registerUser = async (email: string, password: string, username: st
       },
     });
 
-    await createWorkspace(`${newUser.username} - space 1`, `space-1`, newUser.id);
+    await createWorkspaceRegister(`${newUser.username} - space 1`, `space-1`, newUser.id);
 
     return {
       ok: true,

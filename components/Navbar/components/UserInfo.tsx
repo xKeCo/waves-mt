@@ -1,7 +1,7 @@
 'use client';
 import { motion, AnimatePresence } from 'framer-motion';
 import { UserAvatar } from './UserAvatar';
-import { SpaceSwitcher } from './SpaceSwitcher';
+import { WorkspaceSwitcher } from './WorkspaceSwitcher';
 import type { TUser } from '@/types/TUser';
 
 type TSession = {
@@ -24,7 +24,7 @@ export const UserInfo = (session: TSession) => {
         >
           <hr className="mx-3 h-5 w-px rotate-12 bg-neutral-700" />
 
-          <SpaceSwitcher username={user?.username} workspaces={user?.workspaces} />
+          <WorkspaceSwitcher username={user?.username} workspaces={user?.workspaces} />
           <UserAvatar photoURL={user?.photoURL} username={user?.username} />
         </motion.div>
       )}

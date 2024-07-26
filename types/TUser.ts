@@ -1,7 +1,7 @@
 import type { TWorkspace } from './TWorkspace';
 
 export type TUser = {
-  id: number;
+  id: string;
   email: string;
   username: string;
   photoURL: string;

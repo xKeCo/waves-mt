@@ -18,7 +18,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             email: credentials.email as string,
           },
           include: {
-            workspaces: true,
+            workspaces: {
+              select: {
+                id: true,
+                slug: true,
+                name: true,
+                logoURL: true,
+              },
+            },
           },
         });
 
@@ -39,15 +46,19 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   callbacks: {
-    jwt({ token, user }) {
-      if (user) {
-        token.user = user;
+    jwt({ token, user, session, trigger }) {
+      if (user) token.user = user;
+
+      if (trigger === 'update') {
+        return { ...token, user: session.user };
       }
 
       return token;
     },
+
     session({ session, token }) {
       session.user = token.user as any;
+
       return session;
     },
   },
