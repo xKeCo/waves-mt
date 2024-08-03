@@ -1,8 +1,8 @@
 'use client';
 import { useState } from 'react';
-import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { Plus } from 'lucide-react';
+import Avatar from 'boring-avatars';
 
 import { NewWorkspaceDialog } from './NewWorkspaceDialog';
 import { setActiveWorkspace } from '../../../actions/workspace/setActiveWorkspace';
@@ -45,14 +45,7 @@ export const WorkspaceSwitcher = ({
           {workspaces.map((workspace) => (
             <SelectItem key={workspace.slug} value={workspace.slug} className="mr-3">
               <div className="flex items-center gap-2">
-                <Image
-                  src={workspace.logoURL}
-                  alt={workspace.name}
-                  width={16}
-                  height={16}
-                  priority
-                  className="h-4 w-4"
-                />
+                <Avatar name={`${username}${workspace.slug}`} size={16} />
                 {workspace.name}
               </div>
             </SelectItem>

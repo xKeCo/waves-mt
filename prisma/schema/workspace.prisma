@@ -2,7 +2,6 @@ model Workspace {
   id        String   @id @default(cuid())
   slug      String   
   name      String
-  logoURL   String?
 
   owner     User     @relation(fields: [ownerId], references: [id])
   ownerId   String

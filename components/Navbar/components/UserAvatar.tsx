@@ -1,16 +1,18 @@
 'use client';
+import { signOut } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import Avatar from 'boring-avatars';
+
 import { HelpCircle, LogOut } from 'lucide-react';
-import Image from 'next/image';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '../../ui/dropdown-menu';
-import { signOut } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import type { TUser } from '../../../types/TUser';
 
-export const UserAvatar = ({ photoURL, username }: { photoURL: string; username: string }) => {
+export const UserAvatar = ({ photoURL, user }: { photoURL: string; user: TUser }) => {
   const router = useRouter();
 
   const handleLogout = async () => {
@@ -23,8 +25,8 @@ export const UserAvatar = ({ photoURL, username }: { photoURL: string; username:
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <div className="ml-auto flex w-auto items-center justify-start gap-2 rounded-full border-none px-3 py-2 pr-3 hover:bg-neutral-700">
-          <Image src={photoURL} alt="Profile" width={16} height={16} />
-          <h1 className="text-sm text-neutral-400">{username}</h1>
+          <Avatar name={user.username} size={16} variant="beam" />
+          <h1 className="text-sm text-neutral-400">{user.username}</h1>
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="" align="end">

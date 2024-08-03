@@ -8,6 +8,12 @@ const nextConfig = {
         port: '',
         pathname: '/marble/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'avatar.vercel.sh',
+        port: '',
+        pathname: '/**',
+      },
     ],
     dangerouslyAllowSVG: true,
   },

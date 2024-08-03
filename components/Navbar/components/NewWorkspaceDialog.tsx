@@ -3,9 +3,10 @@ import { useState } from 'react';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Loader } from 'lucide-react';
+import { Circle, Loader } from 'lucide-react';
 import { toast } from 'sonner';
 import { useSession } from 'next-auth/react';
+import Avatar from 'boring-avatars';
 
 import {
   Dialog,
@@ -91,7 +92,6 @@ export const NewWorkspaceDialog = ({
             id: newWorkspace?.id,
             slug: newWorkspace?.slug,
             name: newWorkspace?.name,
-            logoURL: newWorkspace?.logoURL,
           },
         ],
       },
@@ -132,6 +132,7 @@ export const NewWorkspaceDialog = ({
                           'workspaceSlug',
                           e.target.value
                             .toLowerCase()
+                            .replace(/^\s+/, '')
                             .replace(/[^a-zA-Z0-9]/g, '-')
                             .replace(/-+/g, '-'),
                         );
@@ -149,9 +150,34 @@ export const NewWorkspaceDialog = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel htmlFor="workspaceSlug">Slug</FormLabel>
-                  <FormControl>
-                    <Input id="workspaceSlug" required type="text" {...field} />
-                  </FormControl>
+                  <div className="flex items-center justify-between gap-2.5">
+                    <div className="flex h-7 w-10 items-center justify-center">
+                      {field.value ? (
+                        <Avatar name={`${session?.user.username}${field.value}`} size={24} />
+                      ) : (
+                        <Circle className="h-6 w-6" />
+                      )}
+                    </div>
+                    <FormControl>
+                      <Input
+                        id="workspaceSlug"
+                        required
+                        type="text"
+                        {...field}
+                        onChange={(e) => {
+                          field.onChange(e);
+                          form.setValue(
+                            'workspaceSlug',
+                            e.target.value
+                              .toLowerCase()
+                              .replace(/^\s+/, '')
+                              .replace(/[^a-zA-Z0-9]/g, '-')
+                              .replace(/-+/g, '-'),
+                          );
+                        }}
+                      />
+                    </FormControl>
+                  </div>
                   <FormMessage />
                 </FormItem>
               )}

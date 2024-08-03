@@ -33,7 +33,6 @@ export const createWorkspace = async (workspaceName: string, workspaceSlug: stri
       data: {
         name: workspaceName,
         slug: workspaceSlug,
-        logoURL: `https://source.boringavatars.com/marble/50/${workspaceSlug}`,
 
         ownerId: session?.user.id,
       },
@@ -41,7 +40,6 @@ export const createWorkspace = async (workspaceName: string, workspaceSlug: stri
         id: true,
         slug: true,
         name: true,
-        logoURL: true,
       },
     });
 
@@ -70,7 +68,6 @@ export const createWorkspaceRegister = async (
       data: {
         name: workspaceName,
         slug: workspaceSlug,
-        logoURL: `https://source.boringavatars.com/marble/50/${workspaceSlug}`,
 
         ownerId: userId,
       },

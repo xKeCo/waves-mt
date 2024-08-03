@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { signIn } from 'next-auth/react';
 
 import { toast } from 'sonner';
-import { Loader } from 'lucide-react';
+import { CircleUser, Loader } from 'lucide-react';
 import {
   Form,
   FormControl,
@@ -22,6 +22,7 @@ import { Input } from '@/components/ui/input';
 
 import { registerUser } from '@/actions/auth/register';
 import { useRouter } from 'next/navigation';
+import Avatar from 'boring-avatars';
 
 export default function AuthForm({ isRegister = false }: Readonly<{ isRegister?: boolean }>) {
   const [loading, setLoading] = useState(false);
@@ -154,9 +155,18 @@ export default function AuthForm({ isRegister = false }: Readonly<{ isRegister?:
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Username</FormLabel>
-                  <FormControl>
-                    <Input placeholder="john" required {...field} />
-                  </FormControl>
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex h-6 w-6 items-center">
+                      {field.value ? (
+                        <Avatar name={field.value} size={24} />
+                      ) : (
+                        <CircleUser className="h-6 w-6" />
+                      )}
+                    </div>
+                    <FormControl>
+                      <Input placeholder="john" required {...field} />
+                    </FormControl>
+                  </div>
                   <FormMessage />
                 </FormItem>
               )}

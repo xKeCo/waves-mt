@@ -23,7 +23,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 id: true,
                 slug: true,
                 name: true,
-                logoURL: true,
               },
             },
           },

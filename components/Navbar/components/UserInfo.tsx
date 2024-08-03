@@ -25,7 +25,7 @@ export const UserInfo = (session: TSession) => {
           <hr className="mx-3 h-5 w-px rotate-12 bg-neutral-700" />
 
           <WorkspaceSwitcher username={user?.username} workspaces={user?.workspaces} />
-          <UserAvatar photoURL={user?.photoURL} username={user?.username} />
+          <UserAvatar photoURL={user?.photoURL} user={user} />
         </motion.div>
       )}
     </AnimatePresence>
