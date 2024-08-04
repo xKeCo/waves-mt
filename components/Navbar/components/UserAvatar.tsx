@@ -10,9 +10,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '../../ui/dropdown-menu';
-import type { TUser } from '../../../types/TUser';
 
-export const UserAvatar = ({ photoURL, user }: { photoURL: string; user: TUser }) => {
+export const UserAvatar = ({ username }: { username: string }) => {
   const router = useRouter();
 
   const handleLogout = async () => {
@@ -25,8 +24,8 @@ export const UserAvatar = ({ photoURL, user }: { photoURL: string; user: TUser }
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <div className="ml-auto flex w-auto items-center justify-start gap-2 rounded-full border-none px-3 py-2 pr-3 hover:bg-neutral-700">
-          <Avatar name={user.username} size={16} variant="beam" />
-          <h1 className="text-sm text-neutral-400">{user.username}</h1>
+          <Avatar name={username} size={16} variant="beam" />
+          <h1 className="text-sm text-neutral-400">{username}</h1>
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="" align="end">

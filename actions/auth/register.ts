@@ -36,13 +36,11 @@ export const registerUser = async (email: string, password: string, username: st
         email: email.toLowerCase(),
         password: hashedPassword,
         username: username.toLowerCase(),
-        photoURL: `https://source.boringavatars.com/marble/50/${username.toLowerCase()}`,
       },
       select: {
         id: true,
         email: true,
         username: true,
-        photoURL: true,
         workspaces: true,
       },
     });
